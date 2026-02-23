@@ -490,65 +490,65 @@ const questionKeywords = {
     "define success": ["success", "goal", "impact", "growth", "value", "achieve", "measurable", "learn", "contribute", "improve"]
 };
 
+function findModelAnswer(question) {
+    const lowerQ = question.toLowerCase();
+    let bestMatch = null;
+    let bestMatchLen = 0;
+    for (const key of Object.keys(modelAnswers)) {
+        const lowerKey = key.toLowerCase();
+        if (lowerQ.includes(lowerKey) && lowerKey.length > bestMatchLen) {
+            bestMatch = modelAnswers[key];
+            bestMatchLen = lowerKey.length;
+        }
+    }
+    return bestMatch;
+}
+
 function generateScore(answer, question) {
     const lowerAnswer = answer.toLowerCase();
     const lowerQuestion = question.toLowerCase();
 
     // ---- Step 1: Detect gibberish/fake answers (score 2-8%) ----
-    // Check for nonsensical patterns
     const words = lowerAnswer.split(/\s+/).filter(w => w.length > 1);
     const uniqueWords = new Set(words);
 
-    // If answer is too short (less than 3 words), it's definitely bad
-    if (words.length < 3) {
-        return Math.floor(Math.random() * 5) + 2; // 2-6%
-    }
+    if (words.length < 3) return Math.floor(Math.random() * 5) + 2;
+    if (uniqueWords.size < words.length * 0.3 && words.length > 5) return Math.floor(Math.random() * 6) + 3;
 
-    // If most words are repeated (spam detection)
-    if (uniqueWords.size < words.length * 0.3 && words.length > 5) {
-        return Math.floor(Math.random() * 6) + 3; // 3-8%
-    }
-
-    // Check if answer has real English words (basic check)
     const commonWords = ['the', 'is', 'a', 'an', 'it', 'in', 'to', 'of', 'and', 'for', 'that', 'this', 'with', 'are', 'was', 'be', 'have', 'has', 'can', 'will', 'not', 'but', 'or', 'which', 'when', 'where', 'how', 'what', 'they', 'we', 'you', 'my', 'its', 'from', 'by', 'on', 'at', 'as', 'use', 'used'];
     const realWordCount = words.filter(w => commonWords.includes(w) || w.length > 3).length;
-    const realWordRatio = realWordCount / words.length;
+    if (realWordCount / words.length < 0.25) return Math.floor(Math.random() * 7) + 2;
 
-    if (realWordRatio < 0.25) {
-        return Math.floor(Math.random() * 7) + 2; // 2-8% for gibberish
-    }
-
-    // ---- Step 2: Question-specific keyword relevance (0-50 points) ----
-    let relevanceScore = 0;
-    let matchedKeywordSets = 0;
+    // ---- Step 2: Model Answer Concept Matching (0-45 points) ----
+    let conceptScore = 0;
     let totalKeywordsMatched = 0;
+    const model = findModelAnswer(question);
 
-    for (const [topic, keywords] of Object.entries(questionKeywords)) {
-        if (lowerQuestion.includes(topic)) {
-            matchedKeywordSets++;
-            const hits = keywords.filter(k => lowerAnswer.includes(k)).length;
-            totalKeywordsMatched += hits;
-            // Score based on percentage of keywords matched
-            const hitRatio = hits / keywords.length;
-            relevanceScore += hitRatio * 50;
+    if (model) {
+        // Check key concepts covered
+        const conceptHits = model.concepts.filter(c => lowerAnswer.includes(c.toLowerCase())).length;
+        // Check keyword matches
+        const keywordHits = model.keywords.filter(k => lowerAnswer.includes(k)).length;
+        totalKeywordsMatched = conceptHits + keywordHits;
+
+        const conceptRatio = conceptHits / model.concepts.length;
+        const keywordRatio = keywordHits / model.keywords.length;
+        // Concepts worth 25 points, keywords worth 20 points
+        conceptScore = (conceptRatio * 25) + (keywordRatio * 20);
+    } else {
+        // Fallback to questionKeywords if no model answer found
+        for (const [topic, keywords] of Object.entries(questionKeywords)) {
+            if (lowerQuestion.includes(topic)) {
+                const hits = keywords.filter(k => lowerAnswer.includes(k)).length;
+                totalKeywordsMatched += hits;
+                conceptScore += (hits / keywords.length) * 45;
+            }
         }
     }
 
-    // If we found matching keyword sets, average them
-    if (matchedKeywordSets > 0) {
-        relevanceScore = relevanceScore / matchedKeywordSets;
-    } else {
-        // Fallback: extract key words from question and check if answer addresses them
-        const questionWords = lowerQuestion.split(/\s+/).filter(w => w.length > 4 && !['which', 'where', 'would', 'about', 'their', 'other', 'explain', 'describe', 'briefly'].includes(w));
-        const questionHits = questionWords.filter(w => lowerAnswer.includes(w)).length;
-        relevanceScore = Math.min((questionHits / Math.max(questionWords.length, 1)) * 40, 40);
-    }
-
-    // If NO relevant keywords matched at all, cap the score very low
-    if (totalKeywordsMatched === 0 && relevanceScore < 5) {
-        // Answer is completely irrelevant to the question
-        const maxScore = 12 + Math.floor(Math.random() * 6); // cap at 12-17%
-        return Math.min(maxScore, 17);
+    // If ZERO relevant content matched, cap score very low
+    if (totalKeywordsMatched === 0) {
+        return Math.floor(Math.random() * 6) + 10; // 10-15%
     }
 
     // ---- Step 3: Length & detail bonus (0-20 points) ----
@@ -566,21 +566,17 @@ function generateScore(answer, question) {
     else if (sentences.length >= 3) structureScore = 10;
     else if (sentences.length >= 2) structureScore = 5;
 
-    // ---- Step 5: Professional language bonus (0-15 points) ----
+    // ---- Step 5: Professional language bonus (0-20 points) ----
     let professionalScore = 0;
     const proTerms = ['for example', 'such as', 'therefore', 'because', 'however', 'in addition',
         'first', 'second', 'third', 'finally', 'moreover', 'furthermore', 'in conclusion',
-        'advantage', 'disadvantage', 'important', 'specifically', 'essentially'];
+        'advantage', 'disadvantage', 'important', 'specifically', 'essentially', 'for instance'];
     const proHits = proTerms.filter(t => lowerAnswer.includes(t)).length;
-    professionalScore = Math.min(proHits * 4, 15);
+    professionalScore = Math.min(proHits * 4, 20);
 
     // ---- Calculate total ----
-    let total = Math.round(relevanceScore + lengthScore + structureScore + professionalScore);
-
-    // Small random variance (±3)
-    total += Math.floor(Math.random() * 7) - 3;
-
-    // Clamp between 3 and 97
+    let total = Math.round(conceptScore + lengthScore + structureScore + professionalScore);
+    total += Math.floor(Math.random() * 5) - 2; // ±2 variance
     return Math.max(3, Math.min(97, total));
 }
 
@@ -594,13 +590,22 @@ function generateFeedback(score, answer, question) {
     const templates = feedbackTemplates[category];
     let feedback = templates[Math.floor(Math.random() * templates.length)];
 
-    // Add specific hints for poor/average scores
-    if (score < 30) {
-        const lowerQ = question.toLowerCase();
-        if (lowerQ.includes('difference')) feedback += ' Make sure to clearly compare both concepts.';
-        else if (lowerQ.includes('explain')) feedback += ' Provide a clear definition first, then elaborate with examples.';
-        else if (lowerQ.includes('example')) feedback += ' Include at least one concrete, real-world example.';
-        else feedback += ' Re-read the question carefully and address each part specifically.';
+    // Add specific hints based on model answer
+    if (score < 50) {
+        const model = findModelAnswer(question);
+        if (model) {
+            const lowerAnswer = answer.toLowerCase();
+            const missed = model.concepts.filter(c => !lowerAnswer.includes(c.toLowerCase()));
+            if (missed.length > 0) {
+                const hint = missed.slice(0, 2).join('" and "');
+                feedback += ` Key concepts missed: "${hint}".`;
+            }
+        } else {
+            const lowerQ = question.toLowerCase();
+            if (lowerQ.includes('difference')) feedback += ' Make sure to clearly compare both concepts.';
+            else if (lowerQ.includes('explain')) feedback += ' Provide a clear definition first, then elaborate with examples.';
+            else feedback += ' Re-read the question carefully and address each part specifically.';
+        }
     }
 
     return feedback;
