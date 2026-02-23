@@ -205,9 +205,9 @@ function submitAnswer() {
         return;
     }
 
-    // Score the answer (AI Placeholder - weighted random based on answer length & content)
-    const score = generateScore(answer);
-    const feedback = generateFeedback(score);
+    // Score the answer using question-specific keyword matching
+    const score = generateScore(answer, questions[currentQuestionIndex]);
+    const feedback = generateFeedback(score, answer, questions[currentQuestionIndex]);
 
     answers.push({
         question: questions[currentQuestionIndex],
@@ -258,47 +258,167 @@ function endInterview() {
     finishInterview();
 }
 
-function generateScore(answer) {
-    // AI Placeholder: Score based on answer quality heuristics
-    let score = 30; // base score
+// ---- Question-Specific Keyword Map for Smart Scoring ----
+const questionKeywords = {
+    // Technical Questions
+    "stack": ["stack", "lifo", "last in first out", "push", "pop", "recursion", "undo", "backtrack"],
+    "queue": ["queue", "fifo", "first in first out", "enqueue", "dequeue", "bfs", "scheduling", "printer"],
+    "binary search": ["binary search", "log n", "o(log", "sorted", "mid", "middle", "divide", "half", "left", "right"],
+    "object-oriented": ["oop", "object oriented", "encapsulation", "inheritance", "polymorphism", "abstraction", "class", "object"],
+    "tcp": ["tcp", "udp", "reliable", "unreliable", "connection", "connectionless", "handshake", "packet", "stream", "datagram"],
+    "normalization": ["normalization", "1nf", "2nf", "3nf", "normal form", "redundancy", "dependency", "functional", "primary key", "partial"],
+    "process": ["process", "thread", "scheduling", "context switch", "pcb", "multithreading", "concurrent", "parallel", "shared memory"],
+    "hash map": ["hash", "map", "dictionary", "key", "value", "collision", "chaining", "probing", "bucket", "hash function"],
+    "sql and nosql": ["sql", "nosql", "relational", "non-relational", "mongodb", "mysql", "schema", "flexible", "scalab", "table", "document", "structured"],
+    "virtual memory": ["virtual memory", "paging", "page table", "swap", "physical", "logical", "address", "ram", "disk", "page fault"],
+    "osi model": ["osi", "layer", "physical", "data link", "network", "transport", "session", "presentation", "application", "tcp/ip"],
+    "linked list": ["linked list", "node", "pointer", "next", "array", "dynamic", "insertion", "deletion", "traversal", "sequential"],
+    "deadlock": ["deadlock", "mutual exclusion", "hold and wait", "no preemption", "circular wait", "resource", "starvation", "banker"],
+    "dns": ["dns", "domain", "ip address", "resolver", "name server", "root", "query", "record", "a record", "cache", "url"],
+    "acid": ["acid", "atomicity", "consistency", "isolation", "durability", "transaction", "commit", "rollback", "database"],
+    "design pattern": ["design pattern", "singleton", "factory", "observer", "instance", "creational", "structural", "behavioral", "reusab"],
+    "dynamic programming": ["dynamic programming", "greedy", "optimal", "subproblem", "memoization", "tabulation", "overlapping", "knapsack", "fibonacci"],
+    "indexing": ["index", "b-tree", "b+ tree", "query", "search", "performance", "primary", "secondary", "clustered", "faster"],
+    "binary search tree": ["bst", "binary search tree", "left", "right", "inorder", "balanced", "avl", "node", "root", "search"],
+    "http": ["http", "https", "ssl", "tls", "secure", "encryption", "certificate", "port 80", "port 443", "protocol"],
+    "polymorphism": ["polymorphism", "overriding", "overloading", "runtime", "compile time", "method", "inherit", "virtual", "interface", "abstract"],
+    // HR Questions
+    "tell me about yourself": ["name", "experience", "background", "education", "college", "university", "skills", "passionate", "career", "interest", "studying", "working"],
+    "strengths": ["strength", "good at", "ability", "skill", "problem solving", "communication", "leader", "team", "quick learner", "analytical", "creative"],
+    "challenging situation": ["challenge", "difficult", "problem", "solved", "overcame", "situation", "action", "result", "learned", "obstacle", "handled"],
+    "why do you want": ["company", "role", "position", "mission", "values", "culture", "growth", "opportunity", "align", "passion", "interested", "contribute"],
+    "5 years": ["future", "goal", "career", "grow", "position", "role", "skills", "develop", "lead", "advance", "achieve", "vision"],
+    "team": ["team", "collaborate", "group", "together", "role", "contributed", "coordinate", "helped", "communication", "member"],
+    "pressure": ["pressure", "stress", "calm", "prioritize", "deadline", "manage", "handle", "breath", "focus", "organized", "plan"],
+    "weakness": ["weakness", "improve", "working on", "area", "learning", "feedback", "better", "growth", "developing", "overcome"],
+    "project": ["project", "built", "developed", "created", "implemented", "designed", "team", "technology", "result", "contribution", "app", "system"],
+    "prioritize": ["prioritize", "priority", "urgent", "important", "deadline", "schedule", "task", "manage", "organize", "list", "plan"],
+    "failed": ["fail", "mistake", "learned", "lesson", "wrong", "setback", "improve", "experience", "growth", "realized"],
+    "criticism": ["criticism", "feedback", "constructive", "improve", "accept", "learn", "change", "perspective", "open", "positive"],
+    "motivates": ["motivate", "passion", "drive", "inspired", "goal", "impact", "satisfaction", "challenge", "purpose", "achieve"],
+    "adapt": ["adapt", "change", "flexible", "adjust", "new", "situation", "learn", "pivot", "transition", "evolve"],
+    "hire you": ["unique", "skill", "value", "contribute", "experience", "qualified", "different", "strength", "bring", "proven"],
+    "leadership": ["leader", "leadership", "led", "guided", "initiative", "team", "decision", "responsibility", "organized", "mentor"],
+    "updated": ["learn", "read", "blog", "course", "update", "trend", "news", "technology", "follow", "community", "conference"],
+    "ideal work": ["work environment", "culture", "team", "collaborative", "growth", "support", "creative", "flexible", "innovative", "balance"],
+    "know about our": ["company", "product", "service", "mission", "industry", "founded", "customer", "market", "research", "known for"],
+    "questions for us": ["question", "ask", "growth", "team", "culture", "role", "day-to-day", "expect", "opportunity", "challenge"]
+};
 
-    // Length bonus (more detailed answers score higher)
-    if (answer.length > 300) score += 25;
-    else if (answer.length > 150) score += 18;
-    else if (answer.length > 80) score += 10;
-    else if (answer.length > 30) score += 5;
-
-    // Structure bonus (answers with multiple sentences)
-    const sentences = answer.split(/[.!?]+/).filter(s => s.trim().length > 0);
-    if (sentences.length >= 4) score += 15;
-    else if (sentences.length >= 2) score += 8;
-
-    // Keyword bonus (has technical or professional terms)
-    const keywords = ['example', 'therefore', 'because', 'first', 'second',
-        'advantage', 'disadvantage', 'important', 'used for', 'difference',
-        'process', 'memory', 'data', 'algorithm', 'function', 'class',
-        'experience', 'team', 'project', 'learned', 'challenge', 'result',
-        'implemented', 'designed', 'developed', 'managed'];
+function generateScore(answer, question) {
     const lowerAnswer = answer.toLowerCase();
-    const keywordHits = keywords.filter(k => lowerAnswer.includes(k)).length;
-    score += Math.min(keywordHits * 3, 15);
+    const lowerQuestion = question.toLowerCase();
 
-    // Add some randomness (±10)
-    score += Math.floor(Math.random() * 20) - 10;
+    // ---- Step 1: Detect gibberish/fake answers (score 2-8%) ----
+    // Check for nonsensical patterns
+    const words = lowerAnswer.split(/\s+/).filter(w => w.length > 1);
+    const uniqueWords = new Set(words);
 
-    // Clamp between 10 and 98
-    return Math.max(10, Math.min(98, score));
+    // If answer is too short (less than 3 words), it's definitely bad
+    if (words.length < 3) {
+        return Math.floor(Math.random() * 5) + 2; // 2-6%
+    }
+
+    // If most words are repeated (spam detection)
+    if (uniqueWords.size < words.length * 0.3 && words.length > 5) {
+        return Math.floor(Math.random() * 6) + 3; // 3-8%
+    }
+
+    // Check if answer has real English words (basic check)
+    const commonWords = ['the', 'is', 'a', 'an', 'it', 'in', 'to', 'of', 'and', 'for', 'that', 'this', 'with', 'are', 'was', 'be', 'have', 'has', 'can', 'will', 'not', 'but', 'or', 'which', 'when', 'where', 'how', 'what', 'they', 'we', 'you', 'my', 'its', 'from', 'by', 'on', 'at', 'as', 'use', 'used'];
+    const realWordCount = words.filter(w => commonWords.includes(w) || w.length > 3).length;
+    const realWordRatio = realWordCount / words.length;
+
+    if (realWordRatio < 0.25) {
+        return Math.floor(Math.random() * 7) + 2; // 2-8% for gibberish
+    }
+
+    // ---- Step 2: Question-specific keyword relevance (0-50 points) ----
+    let relevanceScore = 0;
+    let matchedKeywordSets = 0;
+    let totalKeywordsMatched = 0;
+
+    for (const [topic, keywords] of Object.entries(questionKeywords)) {
+        if (lowerQuestion.includes(topic)) {
+            matchedKeywordSets++;
+            const hits = keywords.filter(k => lowerAnswer.includes(k)).length;
+            totalKeywordsMatched += hits;
+            // Score based on percentage of keywords matched
+            const hitRatio = hits / keywords.length;
+            relevanceScore += hitRatio * 50;
+        }
+    }
+
+    // If we found matching keyword sets, average them
+    if (matchedKeywordSets > 0) {
+        relevanceScore = relevanceScore / matchedKeywordSets;
+    } else {
+        // Fallback: extract key words from question and check if answer addresses them
+        const questionWords = lowerQuestion.split(/\s+/).filter(w => w.length > 4 && !['which', 'where', 'would', 'about', 'their', 'other', 'explain', 'describe', 'briefly'].includes(w));
+        const questionHits = questionWords.filter(w => lowerAnswer.includes(w)).length;
+        relevanceScore = Math.min((questionHits / Math.max(questionWords.length, 1)) * 40, 40);
+    }
+
+    // If NO relevant keywords matched at all, cap the score very low
+    if (totalKeywordsMatched === 0 && relevanceScore < 5) {
+        // Answer is completely irrelevant to the question
+        const maxScore = 12 + Math.floor(Math.random() * 6); // cap at 12-17%
+        return Math.min(maxScore, 17);
+    }
+
+    // ---- Step 3: Length & detail bonus (0-20 points) ----
+    let lengthScore = 0;
+    if (answer.length > 400) lengthScore = 20;
+    else if (answer.length > 250) lengthScore = 16;
+    else if (answer.length > 150) lengthScore = 12;
+    else if (answer.length > 80) lengthScore = 7;
+    else if (answer.length > 40) lengthScore = 3;
+
+    // ---- Step 4: Structure bonus (0-15 points) ----
+    let structureScore = 0;
+    const sentences = answer.split(/[.!?]+/).filter(s => s.trim().length > 5);
+    if (sentences.length >= 5) structureScore = 15;
+    else if (sentences.length >= 3) structureScore = 10;
+    else if (sentences.length >= 2) structureScore = 5;
+
+    // ---- Step 5: Professional language bonus (0-15 points) ----
+    let professionalScore = 0;
+    const proTerms = ['for example', 'such as', 'therefore', 'because', 'however', 'in addition',
+        'first', 'second', 'third', 'finally', 'moreover', 'furthermore', 'in conclusion',
+        'advantage', 'disadvantage', 'important', 'specifically', 'essentially'];
+    const proHits = proTerms.filter(t => lowerAnswer.includes(t)).length;
+    professionalScore = Math.min(proHits * 4, 15);
+
+    // ---- Calculate total ----
+    let total = Math.round(relevanceScore + lengthScore + structureScore + professionalScore);
+
+    // Small random variance (±3)
+    total += Math.floor(Math.random() * 7) - 3;
+
+    // Clamp between 3 and 97
+    return Math.max(3, Math.min(97, total));
 }
 
-function generateFeedback(score) {
+function generateFeedback(score, answer, question) {
     let category;
     if (score >= 75) category = 'excellent';
-    else if (score >= 55) category = 'good';
-    else if (score >= 35) category = 'average';
+    else if (score >= 50) category = 'good';
+    else if (score >= 30) category = 'average';
     else category = 'poor';
 
     const templates = feedbackTemplates[category];
-    return templates[Math.floor(Math.random() * templates.length)];
+    let feedback = templates[Math.floor(Math.random() * templates.length)];
+
+    // Add specific hints for poor/average scores
+    if (score < 30) {
+        const lowerQ = question.toLowerCase();
+        if (lowerQ.includes('difference')) feedback += ' Make sure to clearly compare both concepts.';
+        else if (lowerQ.includes('explain')) feedback += ' Provide a clear definition first, then elaborate with examples.';
+        else if (lowerQ.includes('example')) feedback += ' Include at least one concrete, real-world example.';
+        else feedback += ' Re-read the question carefully and address each part specifically.';
+    }
+
+    return feedback;
 }
 
 function finishInterview() {
