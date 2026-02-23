@@ -4,49 +4,136 @@
 
 // ---- Question Banks (AI Placeholder) ----
 const technicalQuestions = [
+    // --- Data Structures ---
     "Explain the difference between a stack and a queue. Where would you use each one in real-world applications?",
-    "What is the time complexity of Binary Search? Explain how it works step by step.",
-    "Explain the concept of Object-Oriented Programming. What are its four pillars?",
-    "What is the difference between TCP and UDP? Give examples of where each is used.",
-    "Explain normalization in databases. What is the difference between 1NF, 2NF, and 3NF?",
-    "What are processes and threads? How do they differ in an operating system?",
-    "Explain how a hash map (dictionary) works internally. What happens during a collision?",
-    "What is the difference between SQL and NoSQL databases? When would you choose one over the other?",
-    "Explain the concept of virtual memory. Why is it important in modern operating systems?",
-    "What is the OSI model? Briefly explain each of its 7 layers.",
     "What is a linked list? Compare it with an array in terms of performance.",
-    "Explain deadlock in operating systems. What are the four necessary conditions for a deadlock?",
-    "What is DNS? Explain how a URL gets resolved to an IP address step by step.",
-    "Explain the ACID properties in database management systems with examples.",
-    "What are design patterns? Explain the Singleton pattern and give a use case.",
-    "What is the difference between dynamic programming and greedy algorithms? Give one example of each.",
-    "Explain the concept of indexing in databases. How does it improve query performance?",
+    "Explain how a hash map (dictionary) works internally. What happens during a collision?",
     "What is a binary search tree? What are its advantages and potential issues?",
+    "Explain the difference between a singly linked list and a doubly linked list.",
+    "What is a heap data structure? Explain the difference between min-heap and max-heap.",
+    "What is a graph? Explain the difference between BFS and DFS traversal.",
+    "Explain the concept of a trie data structure. Where is it commonly used?",
+    "What is a priority queue? How is it different from a normal queue?",
+    "Explain the difference between a tree and a graph data structure.",
+    // --- Algorithms ---
+    "What is the time complexity of Binary Search? Explain how it works step by step.",
+    "What is the difference between dynamic programming and greedy algorithms? Give one example of each.",
+    "Explain the concept of recursion. What are its advantages and disadvantages?",
+    "What is the difference between Merge Sort and Quick Sort? Which one is better and why?",
+    "Explain Big-O notation. What is the difference between O(n), O(log n), and O(n²)?",
+    "What is a sorting algorithm? Compare Bubble Sort, Selection Sort, and Insertion Sort.",
+    "Explain the concept of hashing. What makes a good hash function?",
+    "What is the Two Pointer technique? Give an example of a problem it can solve.",
+    "Explain the Sliding Window technique with an example.",
+    "What is backtracking? Give an example of a problem solved using backtracking.",
+    // --- OOPs ---
+    "Explain the concept of Object-Oriented Programming. What are its four pillars?",
+    "What is polymorphism? Explain with a code example.",
+    "What is the difference between abstraction and encapsulation? Give real-world examples.",
+    "Explain the concept of inheritance. What are its types?",
+    "What is the difference between method overloading and method overriding?",
+    "What are interfaces and abstract classes? When would you use each?",
+    "Explain the SOLID principles in object-oriented design.",
+    "What is the difference between a class and an object? Explain with an example.",
+    // --- DBMS ---
+    "Explain normalization in databases. What is the difference between 1NF, 2NF, and 3NF?",
+    "What is the difference between SQL and NoSQL databases? When would you choose one over the other?",
+    "Explain the ACID properties in database management systems with examples.",
+    "Explain the concept of indexing in databases. How does it improve query performance?",
+    "What is the difference between a primary key and a foreign key?",
+    "Explain different types of SQL joins with examples.",
+    "What is a stored procedure? How is it different from a function?",
+    "Explain the difference between DELETE, TRUNCATE, and DROP commands in SQL.",
+    "What is a transaction in a database? Explain commit and rollback.",
+    "What are triggers in databases? Give an example of when you would use one.",
+    // --- Operating Systems ---
+    "What are processes and threads? How do they differ in an operating system?",
+    "Explain the concept of virtual memory. Why is it important in modern operating systems?",
+    "Explain deadlock in operating systems. What are the four necessary conditions for a deadlock?",
+    "What are the different types of CPU scheduling algorithms? Compare FCFS, SJF, and Round Robin.",
+    "Explain paging and segmentation in memory management.",
+    "What is a semaphore? How does it help in process synchronization?",
+    "What is the difference between multiprogramming, multitasking, and multithreading?",
+    "Explain the concept of inter-process communication (IPC). What methods are used?",
+    // --- Computer Networks ---
+    "What is the difference between TCP and UDP? Give examples of where each is used.",
+    "What is the OSI model? Briefly explain each of its 7 layers.",
+    "What is DNS? Explain how a URL gets resolved to an IP address step by step.",
     "Explain the difference between HTTP and HTTPS. Why is HTTPS important?",
-    "What is polymorphism? Explain with a code example."
+    "What is a firewall? Explain how it protects a network.",
+    "Explain the difference between IPv4 and IPv6.",
+    "What is subnetting? Why is it used in networking?",
+    "What is the TCP three-way handshake? Explain each step.",
+    "Explain the difference between a router, switch, and hub.",
+    "What is ARP (Address Resolution Protocol)? How does it work?",
+    // --- Web & System Design ---
+    "What are design patterns? Explain the Singleton pattern and give a use case.",
+    "What is REST API? Explain its principles and how it works.",
+    "Explain the concept of MVC architecture. What are its components?",
+    "What is caching? Explain different caching strategies.",
+    "What is the difference between monolithic and microservices architecture?",
+    "Explain what an API is. What is the difference between SOAP and REST?"
 ];
 
 const hrQuestions = [
+    // --- Self Introduction ---
     "Tell me about yourself and walk me through your resume.",
+    "What would you like us to know about you that is not on your resume?",
+    "How would your friends or colleagues describe you?",
+    "Give me a brief overview of your educational background and how it prepared you for this role.",
+    // --- Strengths & Weaknesses ---
     "What are your greatest strengths and how have they helped you succeed?",
+    "What is your greatest weakness? How are you working to improve it?",
+    "Tell me about a skill you recently learned and how you applied it.",
+    "What technical or soft skills do you think set you apart from other candidates?",
+    // --- Behavioral ---
     "Describe a challenging situation you faced and how you handled it.",
-    "Why do you want to work at our company? What attracts you to this role?",
-    "Where do you see yourself in 5 years? What are your career goals?",
     "Tell me about a time when you worked in a team. What was your role?",
     "How do you handle pressure and stressful situations? Give an example.",
-    "What is your greatest weakness? How are you working to improve it?",
-    "Describe a project you are most proud of. What was your contribution?",
-    "How do you prioritize tasks when you have multiple deadlines?",
     "Tell me about a time you failed. What did you learn from it?",
     "How do you handle constructive criticism? Can you give an example?",
-    "What motivates you to give your best at work?",
     "Describe a situation where you had to adapt to a major change.",
-    "Why should we hire you? What makes you different from other candidates?",
     "Tell me about a time you showed leadership qualities.",
+    "Tell me about a time you disagreed with your manager or professor. How did you resolve it?",
+    "Describe a situation where you had to meet a very tight deadline.",
+    "Give an example of a time you went above and beyond what was expected.",
+    "Tell me about a situation where you had to work with a difficult team member.",
+    "Describe a time when you had to make a quick decision without all the information.",
+    // --- Motivation & Goals ---
+    "Why do you want to work at our company? What attracts you to this role?",
+    "Where do you see yourself in 5 years? What are your career goals?",
+    "What motivates you to give your best at work?",
+    "Why should we hire you? What makes you different from other candidates?",
+    "What is your dream job? How does this role align with it?",
+    "What kind of work culture do you thrive in?",
+    // --- Project & Experience ---
+    "Describe a project you are most proud of. What was your contribution?",
+    "Walk me through a problem you solved in your last project or internship.",
+    "What is the most innovative idea you have ever implemented?",
+    "Describe a time when you used data or analytics to make a decision.",
+    "Tell me about a technical project where you had to learn a new technology quickly.",
+    // --- Work Style & Skills ---
+    "How do you prioritize tasks when you have multiple deadlines?",
     "How do you stay updated with the latest trends in your field?",
     "Describe your ideal work environment.",
+    "How do you manage your time when working on multiple projects?",
+    "What tools or methods do you use to stay organized and productive?",
+    "Do you prefer working independently or in a team? Why?",
+    // --- Situational ---
+    "If you disagree with your team's approach to a problem, how would you handle it?",
+    "If you were given a project with very little guidance, how would you start?",
+    "How would you handle a situation where you made a mistake that affected the team?",
+    "If a client or stakeholder kept changing requirements, how would you deal with it?",
+    "How would you approach learning a completely new technology in one week?",
+    // --- Company & Closing ---
     "What do you know about our company and our products/services?",
-    "Do you have any questions for us? (What questions would you ask?)"
+    "Do you have any questions for us? (What questions would you ask?)",
+    "How do you handle work-life balance?",
+    "What salary range are you expecting? How do you determine your value?",
+    "Is there anything else you would like to add that we haven't discussed?",
+    "Where else are you interviewing? How does this role compare?",
+    "When would you be available to start if selected?",
+    "How do you define success in a professional context?"
 ];
 
 // ---- AI Feedback Placeholder Templates ----
@@ -260,49 +347,147 @@ function endInterview() {
 
 // ---- Question-Specific Keyword Map for Smart Scoring ----
 const questionKeywords = {
-    // Technical Questions
+    // ===== TECHNICAL - Data Structures =====
     "stack": ["stack", "lifo", "last in first out", "push", "pop", "recursion", "undo", "backtrack"],
     "queue": ["queue", "fifo", "first in first out", "enqueue", "dequeue", "bfs", "scheduling", "printer"],
-    "binary search": ["binary search", "log n", "o(log", "sorted", "mid", "middle", "divide", "half", "left", "right"],
-    "object-oriented": ["oop", "object oriented", "encapsulation", "inheritance", "polymorphism", "abstraction", "class", "object"],
-    "tcp": ["tcp", "udp", "reliable", "unreliable", "connection", "connectionless", "handshake", "packet", "stream", "datagram"],
-    "normalization": ["normalization", "1nf", "2nf", "3nf", "normal form", "redundancy", "dependency", "functional", "primary key", "partial"],
-    "process": ["process", "thread", "scheduling", "context switch", "pcb", "multithreading", "concurrent", "parallel", "shared memory"],
+    "linked list": ["linked list", "node", "pointer", "next", "array", "dynamic", "insertion", "deletion", "traversal", "sequential", "singly", "doubly"],
     "hash map": ["hash", "map", "dictionary", "key", "value", "collision", "chaining", "probing", "bucket", "hash function"],
-    "sql and nosql": ["sql", "nosql", "relational", "non-relational", "mongodb", "mysql", "schema", "flexible", "scalab", "table", "document", "structured"],
-    "virtual memory": ["virtual memory", "paging", "page table", "swap", "physical", "logical", "address", "ram", "disk", "page fault"],
-    "osi model": ["osi", "layer", "physical", "data link", "network", "transport", "session", "presentation", "application", "tcp/ip"],
-    "linked list": ["linked list", "node", "pointer", "next", "array", "dynamic", "insertion", "deletion", "traversal", "sequential"],
-    "deadlock": ["deadlock", "mutual exclusion", "hold and wait", "no preemption", "circular wait", "resource", "starvation", "banker"],
-    "dns": ["dns", "domain", "ip address", "resolver", "name server", "root", "query", "record", "a record", "cache", "url"],
-    "acid": ["acid", "atomicity", "consistency", "isolation", "durability", "transaction", "commit", "rollback", "database"],
-    "design pattern": ["design pattern", "singleton", "factory", "observer", "instance", "creational", "structural", "behavioral", "reusab"],
-    "dynamic programming": ["dynamic programming", "greedy", "optimal", "subproblem", "memoization", "tabulation", "overlapping", "knapsack", "fibonacci"],
-    "indexing": ["index", "b-tree", "b+ tree", "query", "search", "performance", "primary", "secondary", "clustered", "faster"],
     "binary search tree": ["bst", "binary search tree", "left", "right", "inorder", "balanced", "avl", "node", "root", "search"],
-    "http": ["http", "https", "ssl", "tls", "secure", "encryption", "certificate", "port 80", "port 443", "protocol"],
+    "heap": ["heap", "min-heap", "max-heap", "priority", "complete binary tree", "parent", "child", "heapify", "extract"],
+    "graph": ["graph", "bfs", "dfs", "breadth first", "depth first", "vertex", "edge", "adjacency", "traversal", "visited", "node"],
+    "trie": ["trie", "prefix", "autocomplete", "search", "character", "node", "dictionary", "word", "string"],
+    "priority queue": ["priority queue", "heap", "priority", "dequeue", "highest", "lowest", "scheduling", "order"],
+    "tree": ["tree", "graph", "root", "leaf", "child", "parent", "cycle", "hierarchical", "node", "edge", "connected"],
+
+    // ===== TECHNICAL - Algorithms =====
+    "binary search": ["binary search", "log n", "o(log", "sorted", "mid", "middle", "divide", "half", "left", "right"],
+    "dynamic programming": ["dynamic programming", "greedy", "optimal", "subproblem", "memoization", "tabulation", "overlapping", "knapsack", "fibonacci"],
+    "recursion": ["recursion", "recursive", "base case", "call stack", "stack overflow", "divide", "conquer", "function call", "return"],
+    "merge sort": ["merge sort", "quick sort", "divide", "conquer", "pivot", "partition", "stable", "unstable", "o(n log", "comparison"],
+    "big-o": ["big-o", "time complexity", "space complexity", "o(n)", "o(log", "o(n²)", "o(1)", "constant", "linear", "quadratic", "logarithmic"],
+    "sorting algorithm": ["bubble sort", "selection sort", "insertion sort", "swap", "compare", "pass", "sorted", "unsorted", "stable", "in-place"],
+    "hashing": ["hash", "hash function", "collision", "uniform", "distribution", "deterministic", "bucket", "modulo", "key", "digest"],
+    "two pointer": ["two pointer", "left", "right", "converge", "sorted", "pair", "sum", "opposite", "index"],
+    "sliding window": ["sliding window", "window", "subarray", "substring", "fixed", "variable", "expand", "shrink", "maximum", "minimum"],
+    "backtracking": ["backtracking", "recursion", "constraint", "solution", "explore", "prune", "n-queen", "sudoku", "permutation", "combination"],
+
+    // ===== TECHNICAL - OOPs =====
+    "object-oriented": ["oop", "object oriented", "encapsulation", "inheritance", "polymorphism", "abstraction", "class", "object"],
     "polymorphism": ["polymorphism", "overriding", "overloading", "runtime", "compile time", "method", "inherit", "virtual", "interface", "abstract"],
-    // HR Questions
+    "abstraction": ["abstraction", "encapsulation", "hide", "detail", "interface", "implementation", "access", "modifier", "private", "public", "abstract"],
+    "inheritance": ["inheritance", "parent", "child", "base", "derived", "extends", "super", "single", "multiple", "multilevel", "hierarchical", "hybrid"],
+    "overloading": ["overloading", "overriding", "compile time", "runtime", "same name", "parameter", "signature", "static", "dynamic", "binding"],
+    "interface": ["interface", "abstract class", "implement", "extend", "contract", "method", "multiple inheritance", "pure virtual", "blueprint"],
+    "solid": ["solid", "single responsibility", "open closed", "liskov", "interface segregation", "dependency inversion", "principle", "design"],
+    "class": ["class", "object", "instance", "constructor", "method", "attribute", "property", "blueprint", "instantiate", "new"],
+
+    // ===== TECHNICAL - DBMS =====
+    "normalization": ["normalization", "1nf", "2nf", "3nf", "normal form", "redundancy", "dependency", "functional", "primary key", "partial"],
+    "sql and nosql": ["sql", "nosql", "relational", "non-relational", "mongodb", "mysql", "schema", "flexible", "scalab", "table", "document", "structured"],
+    "acid": ["acid", "atomicity", "consistency", "isolation", "durability", "transaction", "commit", "rollback", "database"],
+    "indexing": ["index", "b-tree", "b+ tree", "query", "search", "performance", "primary", "secondary", "clustered", "faster"],
+    "primary key": ["primary key", "foreign key", "unique", "reference", "constraint", "relationship", "table", "null", "candidate", "composite"],
+    "join": ["join", "inner join", "left join", "right join", "full join", "cross join", "table", "on", "where", "combine", "matching"],
+    "stored procedure": ["stored procedure", "function", "reusable", "parameter", "execute", "call", "sql", "performance", "precompiled", "return"],
+    "delete": ["delete", "truncate", "drop", "remove", "table", "row", "data", "structure", "rollback", "where", "permanent", "undo"],
+    "transaction": ["transaction", "commit", "rollback", "begin", "savepoint", "acid", "consistent", "atomic", "isolation", "database"],
+    "trigger": ["trigger", "event", "before", "after", "insert", "update", "delete", "automatic", "fire", "table", "row"],
+
+    // ===== TECHNICAL - Operating Systems =====
+    "process": ["process", "thread", "scheduling", "context switch", "pcb", "multithreading", "concurrent", "parallel", "shared memory"],
+    "virtual memory": ["virtual memory", "paging", "page table", "swap", "physical", "logical", "address", "ram", "disk", "page fault"],
+    "deadlock": ["deadlock", "mutual exclusion", "hold and wait", "no preemption", "circular wait", "resource", "starvation", "banker"],
+    "scheduling algorithm": ["fcfs", "sjf", "round robin", "priority", "scheduling", "preemptive", "non-preemptive", "burst", "waiting time", "turnaround"],
+    "paging": ["paging", "segmentation", "page", "frame", "segment", "memory", "address", "table", "external", "internal", "fragmentation"],
+    "semaphore": ["semaphore", "mutex", "synchronization", "wait", "signal", "critical section", "binary", "counting", "lock", "process"],
+    "multiprogramming": ["multiprogramming", "multitasking", "multithreading", "concurrent", "parallel", "cpu", "time sharing", "process", "thread"],
+    "inter-process": ["ipc", "inter-process", "pipe", "message queue", "shared memory", "socket", "signal", "communication", "process"],
+
+    // ===== TECHNICAL - Computer Networks =====
+    "tcp": ["tcp", "udp", "reliable", "unreliable", "connection", "connectionless", "handshake", "packet", "stream", "datagram"],
+    "osi model": ["osi", "layer", "physical", "data link", "network", "transport", "session", "presentation", "application", "tcp/ip"],
+    "dns": ["dns", "domain", "ip address", "resolver", "name server", "root", "query", "record", "a record", "cache", "url"],
+    "http": ["http", "https", "ssl", "tls", "secure", "encryption", "certificate", "port 80", "port 443", "protocol"],
+    "firewall": ["firewall", "security", "packet", "filter", "rule", "block", "allow", "traffic", "network", "intrusion", "protection"],
+    "ipv4": ["ipv4", "ipv6", "address", "32-bit", "128-bit", "header", "nat", "shortage", "hexadecimal", "decimal"],
+    "subnetting": ["subnet", "subnetting", "mask", "network", "host", "cidr", "divide", "ip address", "block", "range"],
+    "three-way handshake": ["syn", "ack", "syn-ack", "handshake", "connection", "establish", "tcp", "sequence", "three-way", "step"],
+    "router": ["router", "switch", "hub", "layer", "forward", "broadcast", "mac", "ip", "packet", "network", "collision domain"],
+    "arp": ["arp", "address resolution", "mac", "ip", "broadcast", "request", "reply", "cache", "mapping", "layer 2"],
+
+    // ===== TECHNICAL - Web & System Design =====
+    "design pattern": ["design pattern", "singleton", "factory", "observer", "instance", "creational", "structural", "behavioral", "reusab"],
+    "rest api": ["rest", "api", "endpoint", "get", "post", "put", "delete", "stateless", "resource", "json", "http", "url"],
+    "mvc": ["mvc", "model", "view", "controller", "separation", "concern", "architecture", "request", "response", "route"],
+    "caching": ["cache", "caching", "memory", "redis", "cdn", "hit", "miss", "ttl", "eviction", "lru", "performance", "store"],
+    "microservices": ["monolithic", "microservices", "service", "deploy", "independent", "scalab", "api", "container", "docker", "distributed"],
+    "soap": ["api", "soap", "rest", "interface", "request", "response", "endpoint", "xml", "json", "protocol", "web service"],
+
+    // ===== HR - Self Introduction =====
     "tell me about yourself": ["name", "experience", "background", "education", "college", "university", "skills", "passionate", "career", "interest", "studying", "working"],
+    "not on your resume": ["passion", "hobby", "personal", "value", "interest", "outside", "beyond", "character", "quality", "unique", "volunteer"],
+    "friends": ["describe", "reliable", "hard-working", "fun", "honest", "dedicated", "supportive", "personality", "character", "think"],
+    "educational background": ["education", "college", "university", "degree", "course", "subject", "study", "learn", "academic", "prepared", "knowledge"],
+
+    // ===== HR - Strengths & Weaknesses =====
     "strengths": ["strength", "good at", "ability", "skill", "problem solving", "communication", "leader", "team", "quick learner", "analytical", "creative"],
+    "weakness": ["weakness", "improve", "working on", "area", "learning", "feedback", "better", "growth", "developing", "overcome"],
+    "skill you recently": ["learned", "skill", "new", "applied", "practice", "course", "online", "project", "technology", "improve"],
+    "set you apart": ["unique", "different", "skill", "stand out", "experience", "ability", "strength", "advantage", "special", "value"],
+
+    // ===== HR - Behavioral =====
     "challenging situation": ["challenge", "difficult", "problem", "solved", "overcame", "situation", "action", "result", "learned", "obstacle", "handled"],
-    "why do you want": ["company", "role", "position", "mission", "values", "culture", "growth", "opportunity", "align", "passion", "interested", "contribute"],
-    "5 years": ["future", "goal", "career", "grow", "position", "role", "skills", "develop", "lead", "advance", "achieve", "vision"],
     "team": ["team", "collaborate", "group", "together", "role", "contributed", "coordinate", "helped", "communication", "member"],
     "pressure": ["pressure", "stress", "calm", "prioritize", "deadline", "manage", "handle", "breath", "focus", "organized", "plan"],
-    "weakness": ["weakness", "improve", "working on", "area", "learning", "feedback", "better", "growth", "developing", "overcome"],
-    "project": ["project", "built", "developed", "created", "implemented", "designed", "team", "technology", "result", "contribution", "app", "system"],
-    "prioritize": ["prioritize", "priority", "urgent", "important", "deadline", "schedule", "task", "manage", "organize", "list", "plan"],
     "failed": ["fail", "mistake", "learned", "lesson", "wrong", "setback", "improve", "experience", "growth", "realized"],
     "criticism": ["criticism", "feedback", "constructive", "improve", "accept", "learn", "change", "perspective", "open", "positive"],
-    "motivates": ["motivate", "passion", "drive", "inspired", "goal", "impact", "satisfaction", "challenge", "purpose", "achieve"],
     "adapt": ["adapt", "change", "flexible", "adjust", "new", "situation", "learn", "pivot", "transition", "evolve"],
-    "hire you": ["unique", "skill", "value", "contribute", "experience", "qualified", "different", "strength", "bring", "proven"],
     "leadership": ["leader", "leadership", "led", "guided", "initiative", "team", "decision", "responsibility", "organized", "mentor"],
+    "disagreed": ["disagree", "conflict", "resolved", "discuss", "compromise", "perspective", "listen", "understand", "respect", "solution"],
+    "tight deadline": ["deadline", "tight", "fast", "urgent", "time", "pressure", "prioritize", "deliver", "managed", "on time"],
+    "above and beyond": ["extra", "beyond", "initiative", "voluntary", "exceeded", "above", "effort", "went further", "additional", "proactive"],
+    "difficult team member": ["difficult", "conflict", "team", "resolve", "communicate", "understand", "patience", "perspective", "collaborate", "handle"],
+    "quick decision": ["decision", "quick", "analyze", "intuition", "risk", "information", "judgment", "outcome", "confident", "result"],
+
+    // ===== HR - Motivation & Goals =====
+    "why do you want": ["company", "role", "position", "mission", "values", "culture", "growth", "opportunity", "align", "passion", "interested", "contribute"],
+    "5 years": ["future", "goal", "career", "grow", "position", "role", "skills", "develop", "lead", "advance", "achieve", "vision"],
+    "motivates": ["motivate", "passion", "drive", "inspired", "goal", "impact", "satisfaction", "challenge", "purpose", "achieve"],
+    "hire you": ["unique", "skill", "value", "contribute", "experience", "qualified", "different", "strength", "bring", "proven"],
+    "dream job": ["dream", "ideal", "passion", "goal", "align", "career", "aspire", "role", "fulfill", "long-term"],
+    "work culture": ["culture", "collaborative", "team", "environment", "supportive", "innovative", "open", "value", "growth", "flexible"],
+
+    // ===== HR - Project & Experience =====
+    "project": ["project", "built", "developed", "created", "implemented", "designed", "team", "technology", "result", "contribution", "app", "system"],
+    "problem you solved": ["problem", "solved", "solution", "approach", "analyze", "debug", "fix", "issue", "result", "overcame"],
+    "innovative": ["innovative", "idea", "creative", "new", "solution", "approach", "different", "implemented", "unique", "original"],
+    "data or analytics": ["data", "analytics", "analysis", "metric", "insight", "decision", "chart", "trend", "evidence", "information"],
+    "learn a new technology": ["learn", "technology", "new", "quickly", "documentation", "tutorial", "practice", "hands-on", "project", "adapted"],
+
+    // ===== HR - Work Style =====
+    "prioritize": ["prioritize", "priority", "urgent", "important", "deadline", "schedule", "task", "manage", "organize", "list", "plan"],
     "updated": ["learn", "read", "blog", "course", "update", "trend", "news", "technology", "follow", "community", "conference"],
     "ideal work": ["work environment", "culture", "team", "collaborative", "growth", "support", "creative", "flexible", "innovative", "balance"],
+    "manage your time": ["time management", "schedule", "plan", "organize", "deadline", "calendar", "prioritize", "efficient", "routine", "productive"],
+    "tools or methods": ["tool", "method", "planner", "calendar", "notion", "trello", "list", "organize", "productive", "system"],
+    "independently or in a team": ["independent", "team", "both", "self-motivated", "collaborate", "flexible", "depend", "situation", "prefer", "comfortable"],
+
+    // ===== HR - Situational =====
+    "disagree with your team": ["disagree", "team", "approach", "discuss", "evidence", "compromise", "perspective", "listen", "propose", "alternative"],
+    "very little guidance": ["guidance", "self-directed", "research", "plan", "ask", "clarify", "goal", "break down", "initiative", "start"],
+    "mistake that affected": ["mistake", "responsibility", "own up", "apologize", "fix", "learn", "honest", "transparent", "solution", "team"],
+    "changing requirements": ["requirements", "change", "flexible", "adapt", "communicate", "agile", "prioritize", "scope", "stakeholder", "manage"],
+    "new technology in one week": ["learn", "fast", "documentation", "tutorial", "practice", "hands-on", "focus", "dedicate", "resource", "project"],
+
+    // ===== HR - Company & Closing =====
     "know about our": ["company", "product", "service", "mission", "industry", "founded", "customer", "market", "research", "known for"],
-    "questions for us": ["question", "ask", "growth", "team", "culture", "role", "day-to-day", "expect", "opportunity", "challenge"]
+    "questions for us": ["question", "ask", "growth", "team", "culture", "role", "day-to-day", "expect", "opportunity", "challenge"],
+    "work-life balance": ["balance", "boundary", "health", "time", "personal", "hobby", "recharge", "manage", "sustainable", "well-being"],
+    "salary": ["salary", "value", "market", "research", "experience", "fair", "range", "compensation", "negotiate", "growth"],
+    "anything else": ["add", "mention", "highlight", "strength", "passionate", "excited", "opportunity", "thank", "eager", "contribute"],
+    "where else": ["interviewing", "opportunity", "compare", "interest", "first choice", "align", "explore", "option", "role", "company"],
+    "available to start": ["available", "start", "immediately", "notice", "join", "ready", "week", "month", "transition", "date"],
+    "define success": ["success", "goal", "impact", "growth", "value", "achieve", "measurable", "learn", "contribute", "improve"]
 };
 
 function generateScore(answer, question) {
