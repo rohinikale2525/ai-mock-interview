@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics — InterviewAI</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="particles"></div>
+    <nav class="navbar" id="mainNavbar"></nav>
+
+    <div class="page-content">
+        <div class="container">
+            <!-- Results Header -->
+            <div class="results-header animate-in">
+                <span class="tag tag-purple mb-md" id="resultType" style="display: inline-flex;">💻 Technical
+                    Interview</span>
+                <h1 class="section-title mb-sm">Your Interview <span class="gradient-text">Results</span></h1>
+                <p class="text-secondary" id="resultMeta">10 Questions • B.Tech • Feb 22, 2026</p>
+            </div>
+
+            <!-- Score & Stats Row -->
+            <div class="grid grid-3 mb-xl" style="gap: var(--space-lg);">
+                <!-- Overall Score Gauge -->
+                <div class="card glass text-center animate-in animate-in-delay-1" style="padding: var(--space-2xl);">
+                    <div class="score-gauge">
+                        <svg viewBox="0 0 180 180">
+                            <defs>
+                                <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#7c3aed" />
+                                    <stop offset="100%" style="stop-color:#06b6d4" />
+                                </linearGradient>
+                            </defs>
+                            <circle class="gauge-bg" cx="90" cy="90" r="80" />
+                            <circle class="gauge-fill" cx="90" cy="90" r="80" id="scoreCircle" />
+                        </svg>
+                        <div class="gauge-text">
+                            <div class="gauge-value" id="scoreValue">0</div>
+                            <div class="gauge-label">Overall Score</div>
+                        </div>
+                    </div>
+                    <div class="mt-md" id="scoreTag"></div>
+                </div>
+
+                <!-- Performance Breakdown -->
+                <div class="card glass animate-in animate-in-delay-2" style="padding: var(--space-2xl);">
+                    <h4 class="mb-lg">📊 Performance</h4>
+                    <div style="display: flex; flex-direction: column; gap: var(--space-md);" id="performanceBreakdown">
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="card glass animate-in animate-in-delay-3" style="padding: var(--space-2xl);">
+                    <h4 class="mb-lg">⚡ Quick Stats</h4>
+                    <div style="display: flex; flex-direction: column; gap: var(--space-lg);" id="quickStats">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category Chart -->
+            <div class="card glass mb-xl animate-in animate-in-delay-3" style="padding: var(--space-2xl);">
+                <h3 class="mb-lg">📈 Score Distribution</h3>
+                <div class="bar-chart" id="barChart"></div>
+            </div>
+
+            <!-- Strengths & Improvements -->
+            <div class="grid grid-2 mb-xl" style="gap: var(--space-lg);">
+                <div class="card glass animate-in animate-in-delay-4" style="padding: var(--space-2xl);">
+                    <h3 class="mb-lg">💪 Strengths</h3>
+                    <ul class="improvement-list" id="strengthsList">
+                    </ul>
+                </div>
+                <div class="card glass animate-in animate-in-delay-5" style="padding: var(--space-2xl);">
+                    <h3 class="mb-lg">🎯 Areas of Improvement</h3>
+                    <ul class="improvement-list" id="improvementsList">
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Detailed Q&A Feedback -->
+            <div class="animate-in animate-in-delay-5">
+                <h3 class="mb-lg">📝 Detailed Question Feedback</h3>
+                <div id="feedbackList"></div>
+            </div>
+
+            <!-- Historical Performance (if multiple) -->
+            <div class="card glass mt-xl animate-in" id="historySection"
+                style="padding: var(--space-2xl); display: none;">
+                <h3 class="mb-lg">📊 Performance Trend</h3>
+                <div class="bar-chart" id="historyChart" style="height: 150px;"></div>
+            </div>
+
+            <!-- Actions -->
+            <div class="d-flex justify-between mt-xl animate-in" style="flex-wrap: wrap; gap: var(--space-md);">
+                <a href="dashboard.html" class="btn btn-secondary">← Back to Dashboard</a>
+                <div class="d-flex gap-md">
+                    <a href="select-interview.html" class="btn btn-primary">🔄 Take Another Interview</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/analytics.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — InterviewAI</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="particles"></div>
+    <nav class="navbar" id="mainNavbar"></nav>
+
+    <div class="page-content">
+        <div class="container">
+            <div class="dashboard-layout">
+                <!-- Sidebar -->
+                <aside class="card glass sidebar animate-in">
+                    <ul class="sidebar-nav">
+                        <li><a href="dashboard.html" class="active"><span class="nav-icon">📊</span> Dashboard</a></li>
+                        <li><a href="select-interview.html"><span class="nav-icon">🎤</span> New Interview</a></li>
+                        <li><a href="analytics.html"><span class="nav-icon">📈</span> Analytics</a></li>
+                        <li><a href="profile.html"><span class="nav-icon">👤</span> Profile</a></li>
+                    </ul>
+                    <div
+                        style="margin-top: auto; padding-top: var(--space-xl); border-top: 1px solid var(--border-color); margin-top: var(--space-xl);">
+                        <a href="#" onclick="logout()"
+                            style="display: flex; align-items: center; gap: var(--space-md); padding: 12px 16px; border-radius: var(--radius-md); font-size: 0.9rem; color: var(--text-muted); transition: var(--transition-base);">
+                            <span class="nav-icon">🚪</span> Logout
+                        </a>
+                    </div>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="main-content">
+                    <!-- Welcome Banner -->
+                    <div class="card glass welcome-banner animate-in animate-in-delay-1">
+                        <div class="banner-decoration">🎯</div>
+                        <h2 id="welcomeText">Welcome back! 👋</h2>
+                        <p>Ready to practice? Start a new mock interview and sharpen your skills.</p>
+                        <a href="select-interview.html" class="btn btn-primary">🚀 Start New Interview</a>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="grid grid-3 mb-xl" style="gap: var(--space-md);" id="statsGrid">
+                        <div class="card glass stat-card animate-in animate-in-delay-2">
+                            <div class="stat-icon">📝</div>
+                            <div class="stat-value" id="totalInterviews">0</div>
+                            <div class="stat-label">Total Interviews</div>
+                        </div>
+                        <div class="card glass stat-card animate-in animate-in-delay-3">
+                            <div class="stat-icon">🏆</div>
+                            <div class="stat-value" id="avgScore">—</div>
+                            <div class="stat-label">Average Score</div>
+                        </div>
+                        <div class="card glass stat-card animate-in animate-in-delay-4">
+                            <div class="stat-icon">⭐</div>
+                            <div class="stat-value" id="bestCategory">—</div>
+                            <div class="stat-label">Best Category</div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="grid grid-2 mb-xl" style="gap: var(--space-md);">
+                        <a href="select-interview.html" class="card glass card-hover animate-in animate-in-delay-3"
+                            style="text-decoration: none;">
+                            <div style="display: flex; align-items: center; gap: var(--space-lg);">
+                                <div
+                                    style="width: 56px; height: 56px; border-radius: var(--radius-md); background: rgba(124, 58, 237, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                    💻</div>
+                                <div>
+                                    <h4>Technical Interview</h4>
+                                    <p class="text-muted" style="font-size: 0.85rem;">DSA, OS, DBMS, CN & more</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="select-interview.html" class="card glass card-hover animate-in animate-in-delay-4"
+                            style="text-decoration: none;">
+                            <div style="display: flex; align-items: center; gap: var(--space-lg);">
+                                <div
+                                    style="width: 56px; height: 56px; border-radius: var(--radius-md); background: rgba(6, 182, 212, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                    🗣️</div>
+                                <div>
+                                    <h4>HR Interview</h4>
+                                    <p class="text-muted" style="font-size: 0.85rem;">Behavioral & situational questions
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Recent Interviews -->
+                    <div class="card glass animate-in animate-in-delay-5">
+                        <div class="d-flex justify-between align-center mb-lg">
+                            <h3>📋 Recent Interviews</h3>
+                            <a href="analytics.html" class="btn btn-sm btn-outline">View All</a>
+                        </div>
+                        <div id="historyList">
+                            <div class="text-center" style="padding: 3rem;">
+                                <p style="font-size: 3rem; margin-bottom: var(--space-md);">🎤</p>
+                                <p class="text-secondary">No interviews yet. Start your first one!</p>
+                                <a href="select-interview.html" class="btn btn-primary btn-sm mt-lg">Start Interview</a>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

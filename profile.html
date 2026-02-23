@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile — InterviewAI</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="particles"></div>
+    <nav class="navbar" id="mainNavbar"></nav>
+
+    <div class="page-content">
+        <div class="container container-md">
+            <!-- Profile Header -->
+            <div class="card glass profile-header animate-in" id="profileHeader">
+                <div class="profile-avatar" id="profileAvatar">RS</div>
+                <div class="profile-info">
+                    <h2 id="profileName">Student</h2>
+                    <p id="profileEmail">student@college.edu</p>
+                    <div class="mt-sm" id="profileTags"></div>
+                </div>
+            </div>
+
+            <!-- Profile Form -->
+            <div class="card glass animate-in animate-in-delay-2">
+                <h3 style="margin-bottom: var(--space-lg);">📝 Edit Profile</h3>
+                <form id="profileForm">
+                    <div class="grid grid-2" style="gap: var(--space-lg);">
+                        <div class="form-group">
+                            <label class="form-label" for="name">Full Name</label>
+                            <input type="text" class="form-input" id="name" placeholder="Your name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email</label>
+                            <input type="email" class="form-input" id="email" placeholder="Email" readonly
+                                style="opacity: 0.6;">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-2" style="gap: var(--space-lg);">
+                        <div class="form-group">
+                            <label class="form-label" for="college">College</label>
+                            <input type="text" class="form-input" id="college" placeholder="Your college">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="course">Course</label>
+                            <select class="form-input" id="course">
+                                <option value="">Select Course</option>
+                                <option value="BTech">B.Tech</option>
+                                <option value="BCA">BCA</option>
+                                <option value="BSc">B.Sc Computer Science</option>
+                                <option value="MCA">MCA</option>
+                                <option value="MBA">MBA</option>
+                                <option value="Other">Other Graduation</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-2" style="gap: var(--space-lg);">
+                        <div class="form-group">
+                            <label class="form-label" for="year">Year of Study</label>
+                            <select class="form-input" id="year">
+                                <option value="">Select Year</option>
+                                <option value="1st Year">1st Year</option>
+                                <option value="2nd Year">2nd Year</option>
+                                <option value="3rd Year">3rd Year</option>
+                                <option value="4th Year">4th Year</option>
+                                <option value="Graduated">Graduated</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="phone">Phone</label>
+                            <input type="tel" class="form-input" id="phone" placeholder="+91 98765 43210">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="skills">Skills (comma-separated)</label>
+                        <input type="text" class="form-input" id="skills" placeholder="e.g. Java, Python, React, SQL">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="bio">Bio / About</label>
+                        <textarea class="form-input" id="bio" rows="3"
+                            placeholder="Tell us about yourself..."></textarea>
+                    </div>
+
+                    <div style="display: flex; gap: var(--space-md); justify-content: flex-end;">
+                        <a href="dashboard.html" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-primary">💾 Save Profile</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+
+</html>

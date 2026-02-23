@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Interview — InterviewAI</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="particles"></div>
+    <nav class="navbar" id="mainNavbar"></nav>
+
+    <div class="page-content">
+        <div class="container container-md">
+            <div class="text-center mb-2xl animate-in">
+                <h2 class="section-title">Configure Your <span class="gradient-text">Interview</span></h2>
+                <p class="text-secondary">Choose your preferences and start practicing</p>
+            </div>
+
+            <!-- Step Indicator -->
+            <div class="step-indicator animate-in animate-in-delay-1" id="stepIndicator">
+                <div class="step-dot active" data-step="1"></div>
+                <div class="step-line" data-line="1"></div>
+                <div class="step-dot" data-step="2"></div>
+                <div class="step-line" data-line="2"></div>
+                <div class="step-dot" data-step="3"></div>
+                <div class="step-line" data-line="3"></div>
+                <div class="step-dot" data-step="4"></div>
+            </div>
+
+            <!-- Step 1: Interview Type -->
+            <div class="interview-step animate-in animate-in-delay-2" id="step1">
+                <h3 class="text-center mb-lg">Step 1: Choose Interview Type</h3>
+                <div class="select-grid">
+                    <div class="select-card" data-value="Technical" onclick="selectOption(this, 'type')">
+                        <span class="check-mark">✓</span>
+                        <span class="card-icon">💻</span>
+                        <div class="card-title">Technical</div>
+                        <div class="card-desc">DSA, OS, DBMS, CN, OOPs</div>
+                    </div>
+                    <div class="select-card" data-value="HR" onclick="selectOption(this, 'type')">
+                        <span class="check-mark">✓</span>
+                        <span class="card-icon">🗣️</span>
+                        <div class="card-title">HR</div>
+                        <div class="card-desc">Behavioral & Situational</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Course -->
+            <div class="interview-step hidden" id="step2">
+                <h3 class="text-center mb-lg">Step 2: Select Your Course</h3>
+                <div class="select-grid">
+                    <div class="select-card" data-value="BTech" onclick="selectOption(this, 'course')">
+                        <span class="check-mark">✓</span>
+                        <span class="card-icon">🎓</span>
+                        <div class="card-title">B.Tech</div>
+                        <div class="card-desc">Engineering students</div>
+                    </div>
+                    <div class="select-card" data-value="Other" onclick="selectOption(this, 'course')">
+                        <span class="check-mark">✓</span>
+                        <span class="card-icon">📚</span>
+                        <div class="card-title">Other Graduation</div>
+                        <div class="card-desc">BCA, BSc, MBA, MCA & more</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Duration -->
+            <div class="interview-step hidden" id="step3">
+                <h3 class="text-center mb-lg">Step 3: Choose Duration</h3>
+                <div class="select-grid">
+                    <div class="select-card" data-value="10" onclick="selectOption(this, 'duration')">
+                        <span class="check-mark">✓</span>
+                        <span class="card-icon">⏱️</span>
+                        <div class="card-title">10 Minutes</div>
+                        <div class="card-desc">Quick practice session</div>
+                    </div>
+                    <div class="select-card" data-value="15" onclick="selectOption(this, 'duration')">
+                        <span class="check-mark">✓</span>
+                        <span class="card-icon">⏰</span>
+                        <div class="card-title">15 Minutes</div>
+                        <div class="card-desc">Extended deep practice</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4: Questions -->
+            <div class="interview-step hidden" id="step4">
+                <h3 class="text-center mb-lg">Step 4: Number of Questions</h3>
+                <div class="select-grid">
+                    <div class="select-card" data-value="10" onclick="selectOption(this, 'questions')">
+                        <span class="check-mark">✓</span>
+                        <span class="card-icon">🔟</span>
+                        <div class="card-title">10 Questions</div>
+                        <div class="card-desc">Standard interview set</div>
+                    </div>
+                    <div class="select-card" data-value="15" onclick="selectOption(this, 'questions')">
+                        <span class="check-mark">✓</span>
+                        <span class="card-icon">1️⃣5️⃣</span>
+                        <div class="card-title">15 Questions</div>
+                        <div class="card-desc">Comprehensive coverage</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary & Start -->
+            <div class="interview-step hidden" id="stepSummary">
+                <div class="card glass text-center" style="padding: 2.5rem;">
+                    <h3 style="margin-bottom: var(--space-lg);">🎯 Interview Summary</h3>
+                    <div class="grid grid-2"
+                        style="gap: var(--space-md); max-width: 400px; margin: 0 auto var(--space-xl);"
+                        id="summaryGrid">
+                    </div>
+                    <button class="btn btn-primary btn-lg" onclick="startInterview()">
+                        🚀 Start Interview
+                    </button>
+                </div>
+            </div>
+
+            <!-- Navigation buttons -->
+            <div class="d-flex justify-between mt-xl" id="stepNav">
+                <button class="btn btn-secondary hidden" id="prevBtn" onclick="prevStep()">← Previous</button>
+                <div></div>
+                <button class="btn btn-primary hidden" id="nextBtn" onclick="nextStep()">Next →</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/select-interview.js"></script>
+</body>
+
+</html>
